@@ -1,6 +1,7 @@
 class TrieNode:
     def __init__(self, char, parent=None):
         self._char = char
+        self._word_at = {}
         self._parent = parent
         self._children = []
 
@@ -23,6 +24,10 @@ class TrieNode:
     @property
     def parent(self):
         return self._parent
+
+    @property
+    def word_at(self):
+        return self._word_at
 
 
 class Trie:
@@ -63,7 +68,7 @@ class Trie:
         func = self.print_node
         self.preorder(func)
 
-    def add_word(self, string):
+    def add_word(self, string, file_path):
         current_node = self._root
         for char in string:
             add_to_node = True
@@ -76,3 +81,5 @@ class Trie:
                 new_node = TrieNode(char, current_node)
                 current_node.children.append(new_node)
                 current_node = new_node
+        count_at_node = current_node.word_at.get(file_path, 0)
+        current_node.word_at[file_path] = count_at_node + 1
