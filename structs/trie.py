@@ -83,3 +83,18 @@ class Trie:
                 current_node = new_node
         count_at_node = current_node.word_at.get(file_path, 0)
         current_node.word_at[file_path] = count_at_node + 1
+
+    # trazi rec u trie stablu i vraca recnik koji sadrzi
+    # dokumente gde je rec nadjena i broj nadjenih reci u svakom dokumentu
+    def find_word(self, string):
+        current_node = self._root
+        for char in string:
+            char_found = False
+            for child in current_node.children:
+                if child.char == char:
+                    current_node = child
+                    char_found = True
+                    break
+            if not char_found:
+                return {}
+        return current_node.word_at

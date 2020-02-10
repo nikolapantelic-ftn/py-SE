@@ -15,4 +15,4 @@ def parse_html(path):
         print('Parsing file"' + file + '"')
         links, words = parser.parse(file)
         for word in words:
-            trie.add_word(word, path)
+            trie.add_word(word, file)
