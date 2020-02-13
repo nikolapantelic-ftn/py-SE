@@ -3,7 +3,7 @@ from scripts.load_data import trie
 
 def parse_search(search_string):
     string_list = search_string.split()
-    if string_list.any(["AND", "OR", "NOT"]):
+    if any(search in ["AND", "OR", "NOT"] for search in string_list):
         if len(string_list) == 3:
             if string_list[1] == "AND":
                 return [string_list[0]], string_list[2], None
