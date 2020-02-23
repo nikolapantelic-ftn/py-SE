@@ -3,7 +3,11 @@ import os
 
 # Vraca putanje svih html fajlova u direktorijumu i poddirektorijumima
 def get_html_files(dir_path):
-    list_all = os.listdir(dir_path)
+    try:
+        list_all = os.listdir(dir_path)
+    except FileNotFoundError as err:
+        print(err.strerror)
+        return []
     file_list = list()
     for f in list_all:
         file_path = os.path.join(dir_path, f)
