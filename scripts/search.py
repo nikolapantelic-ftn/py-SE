@@ -1,5 +1,5 @@
 from scripts.load_data import trie
-
+from modules.advanced_parser import advanced_parse_search
 
 def parse_search(search_string):
     string_list = search_string.split()
@@ -28,3 +28,16 @@ def search_documents(search_string):
         doc_list = doc_list.difference(set(trie.find_word(excluding_string)))
 
     return doc_list
+
+
+"""
+Napredna pretraga.
+Za ispis stabla parsiranja koristiti: 
+    print(parse_tree.pretty())
+"""
+
+
+def advanced_search(search_string):
+    parse_tree = advanced_parse_search(search_string)
+    print(parse_tree.pretty())
+    # TO-DO: evaluacija stabla parsiranja
