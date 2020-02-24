@@ -8,6 +8,9 @@ class Set:
     def add(self, el):
         self.data[el] = None
 
+    def remove(self,el):
+        del self.data[el]
+
     def union(self, *args):
         answer = Set()
         for i in self.data:
@@ -29,10 +32,15 @@ class Set:
 
     def difference(self, s):
         answer = Set()
-        for k in s:
+        for k in self:
+            answer.add(k)
+        for n in s:
             try:
-                self.data[k]
+                self.data[n]
+                answer.remove(n)
             except KeyError:
-                answer.add(k)
+                pass
 
         return answer
+def __str__(self):
+    return str(self.data.keys())

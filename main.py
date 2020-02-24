@@ -30,7 +30,7 @@ while key != "0":
         search_string = input()
         try:
             docs = search_documents(search_string)
-            if docs:
+            if docs.data:
                 print("Rezultat pretrage: ")
                 print(docs)
             else:
