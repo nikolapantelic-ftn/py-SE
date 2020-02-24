@@ -1,13 +1,21 @@
 from scripts.load_data import parse_html
 from scripts.search import search_documents, advanced_search, lark_enabled
+from scripts.load_graph import make_graph
+import os
 
 key = ""
 print("|----------------------|\n|\t py-SE\t       |\n|----------------------|\n")
+
+os.chdir("test-skup")
+os.chdir("python-2.7.7-docs-html")
+path = os.path.abspath("")
+
 while key != "0":
     print("Izaberite opciju:")
     print("1 - Parsiranje dokumenata")
     print("2 - Unos upita za pretragu")
     print("3 - Napredna pretraga")
+    print ("4- Nacrtaj graph")
     print("0 - Izlaz")
     key = input()
     if key == "1":
@@ -40,3 +48,7 @@ while key != "0":
             advanced_search(search_string)
         except Exception as e:
             print("Pogresan unos upita napredne pretrage")
+    if key=="4":
+
+        graph=make_graph(path)
+        print(graph)
