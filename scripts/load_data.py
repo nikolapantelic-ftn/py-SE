@@ -1,22 +1,22 @@
 from modules.parser import Parser
 from modules.files import get_html_files
 from structs.trie import Trie
+import time
 
-link_list = []
-word_list = []
 trie = Trie()
-edge_list=list()
-
+edge_list = list()
 
 
 def parse_html(path):
-    global link_list, word_list, trie
     parser = Parser()
     html_paths = get_html_files(path)
+    begin_time = time.time()
     for file in html_paths:
-        print('Parsing file"' + file + '"')
+        print('Parsing file -- ' + file)
         links, words = parser.parse(file)
         for word in words:
             trie.add_word(word, file)
         for link in links:
-            edge_list.append((file,link))
+            edge_list.append((file, link))
+    if html_paths:
+        print("Direktorijum parsiran za %s sekundi" % (time.time() - begin_time))
