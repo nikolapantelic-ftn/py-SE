@@ -13,5 +13,5 @@ def rank(graph, res):
 
         rank_page[page]=int(word_count+num_links*0.6  +num_in_links*0.2)
 
-    print(rank_page)
+    #4print(rank_page)
     return rank_page

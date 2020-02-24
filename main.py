@@ -3,6 +3,7 @@ from scripts.load_data import parse_html
 from scripts.search import search_documents, advanced_search, lark_enabled
 from scripts.load_graph import make_graph
 from scripts.load_data import trie
+from modules.sort import sort
 
 
 import os
@@ -10,9 +11,7 @@ import os
 key = ""
 print("|----------------------|\n|\t py-SE\t       |\n|----------------------|\n")
 
-os.chdir("test-skup")
-os.chdir("python-2.7.7-docs-html\whatsnew")
-path = os.path.abspath("")
+
 
 while key != "0":
     print("Izaberite opciju:")
@@ -27,8 +26,8 @@ while key != "0":
         print("Unesite direktorijum za parsiranje:")
         path = input()
         try:
-            edge_list = list()
-            parse_html(path, edge_list)
+
+            parse_html(path)
         except NotADirectoryError as nde:
             print("Uneta putanja ne odgovara direktorijumu.")
     if key == "2":
@@ -55,16 +54,20 @@ while key != "0":
         except Exception as e:
             print("Pogresan unos upita napredne pretrage")
     if key == "4":
-        graph = make_graph(path)
+        graph = make_graph()
         print(graph)
     if key == "5":
+        print("unesite rec za pretragu:")
         word = input("")
-        print(word)
-        #graph = make_graph(path)
+
+
         res = trie.find_word(word)
-        print(len(res))
+
 
         if len(res) > 0:
-            rang_res = rank(graph,res)
+            rank_res = rank(graph,res)
+            list_rank=list(rank_res.items())
+            sort(list_rank,0,len(list_rank)-1)
+            print(list_rank)
         else:
             print("neuspesna pretraga")

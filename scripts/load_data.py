@@ -5,10 +5,11 @@ from structs.trie import Trie
 link_list = []
 word_list = []
 trie = Trie()
+edge_list=list()
 
 
 
-def parse_html(path,edge_list):
+def parse_html(path):
     global link_list, word_list, trie
     parser = Parser()
     html_paths = get_html_files(path)

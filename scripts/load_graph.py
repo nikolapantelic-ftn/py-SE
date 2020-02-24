@@ -1,16 +1,15 @@
-from modules.parser import Parser
+
 from structs.graph import Graph
-from scripts.load_data import parse_html
+from scripts.load_data import edge_list
+
 import time
 
 
-def make_graph(path):
+def make_graph():
     print("\n Ucitavanje graph\n")
-    edge_list=list()
     graph=Graph()
-    parser=Parser()
     begin_time=time.time()
-    parse_html(path,edge_list)
+
     list_vertex=set()
     for edge in edge_list:
         list_vertex.add(edge[0])
