@@ -1,5 +1,14 @@
 from scripts.load_data import trie
-from modules.advanced_parser import advanced_parse_search
+from structs.set import Set
+
+lark_enabled = True
+try:
+    from modules.advanced_parser import advanced_parse_search
+except ModuleNotFoundError as mnfe:
+    lark_enabled = False
+    print("Lark parser nije instaliran! Napredna pretraga nece biti moguca.\n"
+          " Instalirati Lark: 'pip install lark-parser'")
+
 
 def parse_search(search_string):
     string_list = search_string.split()
@@ -18,14 +27,18 @@ def parse_search(search_string):
 
 
 def search_documents(search_string):
-    doc_list = set()
+    doc_list = Set()
     string_list, mandatory_string, excluding_string = parse_search(search_string)
     for string in string_list:
-        doc_list.update(trie.find_word(string).keys())
+        doc_list = doc_list.union(trie.find_word(string).keys())
     if mandatory_string:
-        doc_list = doc_list.intersection(set(trie.find_word(mandatory_string).keys()))
+        mandatory_docs = Set()
+        mandatory_docs = mandatory_docs.union(trie.find_word(mandatory_string).keys())
+        doc_list = doc_list.intersection(mandatory_docs)
     if excluding_string:
-        doc_list = doc_list.difference(set(trie.find_word(excluding_string)))
+        excluding_docs = Set()
+        excluding_docs = excluding_docs.union(trie.find_word(excluding_string))
+        doc_list = doc_list.difference(excluding_docs)
 
     return doc_list
 

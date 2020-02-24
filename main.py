@@ -1,5 +1,5 @@
 from scripts.load_data import parse_html
-from scripts.search import search_documents, advanced_search
+from scripts.search import search_documents, advanced_search, lark_enabled
 
 key = ""
 print("|----------------------|\n|\t py-SE\t       |\n|----------------------|\n")
@@ -31,6 +31,9 @@ while key != "0":
             print(ve)
         input("Pritisni Enter za nastavak...")
     if key == "3":
+        if not lark_enabled:
+            print("Lark parser nije instaliran. Instalirajte Lark parser: 'pip install lark-parser'")
+            continue
         print("Pretrazi: ")
         search_string = input()
         try:
