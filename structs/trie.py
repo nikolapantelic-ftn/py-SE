@@ -97,4 +97,4 @@ class Trie:
                     break
             if not char_found:
                 return {}
-        return current_node.word_at
+        return current_node.word_at.copy()

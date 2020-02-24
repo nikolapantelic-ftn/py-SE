@@ -4,11 +4,13 @@ class Set:
 
     def __iter__(self):
         return self.data.__iter__()
+    def __str__(self):
+       return str(self.data.keys())
 
     def add(self, el):
         self.data[el] = None
 
-    def remove(self,el):
+    def remove(self, el):
         del self.data[el]
 
     def union(self, *args):
@@ -42,5 +44,7 @@ class Set:
                 pass
 
         return answer
-def __str__(self):
-    return str(self.data.keys())
+
+
+
+
