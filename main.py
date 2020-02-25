@@ -65,9 +65,27 @@ while key != "0":
 
 
         if len(res) > 0:
+            page_size = int(input("Koliko stranica treba prikazati po pretrazi: "))
+            num_res=len(res)
+            page_num=(num_res // page_size)+1
+            current_page = 0
             rank_res = rank(graph,res)
             list_rank=list(rank_res.items())
             sort(list_rank,0,len(list_rank)-1)
-            print(list_rank)
+            while current_page != -1:
+               if(current_page>=page_num):
+                   print("Stranica ne postoji")
+                   current_page=-1
+               else:
+                print("--" * 70)
+                print("{:100}      {:4}".format("HTML page", "RANK"))
+
+                for index in range(current_page * page_size, current_page * page_size + page_size):
+                    if index < len(list_rank):
+                        line = list_rank[index]
+                        print("{:100}      {:4}".format(str(line[0]), str(line[1])))
+                print("PAGE %d"%current_page)
+                tmp=page_num-1
+                current_page = int(input("Izaberite broj stranice:    (Od 0 do %d || -1 za izlazak)"%tmp))
         else:
             print("neuspesna pretraga")
