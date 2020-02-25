@@ -8,6 +8,7 @@ edge_list = list()
 
 
 def parse_html(path):
+    trie.empty()
     parser = Parser()
     html_paths = get_html_files(path)
     begin_time = time.time()

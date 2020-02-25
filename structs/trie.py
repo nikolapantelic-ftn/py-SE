@@ -37,6 +37,9 @@ class Trie:
     def is_empty(self):
         return self._root is None
 
+    def empty(self):
+        self._root = TrieNode('#')
+
     def depth(self, node):
         d = 0
         current_node = node
@@ -86,12 +89,13 @@ class Trie:
 
     # trazi rec u trie stablu i vraca recnik koji sadrzi
     # dokumente gde je rec nadjena i broj nadjenih reci u svakom dokumentu
-    def find_word(self, string):
+    def find_word(self, word):
+        string = word.lower()
         current_node = self._root
         for char in string:
             char_found = False
             for child in current_node.children:
-                if child.char == char:
+                if child.char.lower() == char:
                     current_node = child
                     char_found = True
                     break

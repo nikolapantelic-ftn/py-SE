@@ -18,8 +18,8 @@ while key != "0":
     print("1 - Parsiranje dokumenata")
     print("2 - Unos upita za pretragu")
     print("3 - Napredna pretraga")
-    print("4- Nacrtaj graph")
-    print("5- Rangirana pretraga ")
+    print("4 - Nacrtaj graph")
+    print("5 - Rangirana pretraga ")
     print("0 - Izlaz")
     key = input()
     if key == "1":
@@ -36,8 +36,9 @@ while key != "0":
         try:
             docs = search_documents(search_string)
             if docs.data:
-                print("Rezultat pretrage: ")
-                print(docs)
+                print("Stranice koje zadovoljavaju pretragu: ")
+                for doc in docs.data:
+                    print(doc)
             else:
                 print("Pretraga - " + search_string + " - se ne poklapa ni sa jednim dokumentom.")
         except ValueError as ve:
