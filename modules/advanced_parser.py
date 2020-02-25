@@ -11,6 +11,7 @@ parser = Lark('''
         start : exp
         exp : WORD -> word
             | "(" exp ")"
+            | exp exp -> or_op
             | exp "||" exp -> or_op
             | exp "&&" exp -> and_op
             | "!" exp -> not_op
