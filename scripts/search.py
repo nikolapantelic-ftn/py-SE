@@ -27,19 +27,29 @@ def parse_search(search_string):
 
 
 def search_documents(search_string):
-    doc_list = Set()
+    doc_list = {}
     string_list, mandatory_string, excluding_string = parse_search(search_string)
     for string in string_list:
-        doc_list = doc_list.union(trie.find_word(string).keys())
+        docs = trie.find_word(string)
+        for doc in docs.keys():
+            if doc in doc_list:
+                doc_list[doc] = doc_list[doc] + docs[doc]
+            else:
+                doc_list[doc] = docs[doc]
     if mandatory_string:
-        mandatory_docs = Set()
-        mandatory_docs = mandatory_docs.union(trie.find_word(mandatory_string).keys())
-        doc_list = doc_list.intersection(mandatory_docs)
+        temp_doc_list = {}
+        mandatory_docs = trie.find_word(mandatory_string)
+        for doc in mandatory_docs.keys():
+            if doc in doc_list:
+                temp_doc_list[doc] = doc_list[doc] + mandatory_docs[doc]
+        doc_list = temp_doc_list
     if excluding_string:
-        excluding_docs = Set()
-        excluding_docs = excluding_docs.union(trie.find_word(excluding_string))
-        doc_list = doc_list.difference(excluding_docs)
-
+        excluding_docs = trie.find_word(excluding_string)
+        for doc in excluding_docs.keys():
+            try:
+                doc_list.pop(doc)
+            except KeyError as e:
+                pass
     return doc_list
 
 

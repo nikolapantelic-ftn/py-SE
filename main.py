@@ -35,9 +35,9 @@ while key != "0":
         search_string = input()
         try:
             docs = search_documents(search_string)
-            if docs.data:
+            if docs:
                 print("Stranice koje zadovoljavaju pretragu: ")
-                for doc in docs.data:
+                for doc in docs.keys():
                     print(doc)
             else:
                 print("Pretraga - " + search_string + " - se ne poklapa ni sa jednim dokumentom.")
@@ -58,17 +58,15 @@ while key != "0":
         graph = make_graph()
         print(graph)
     if key == "5":
-        print("unesite rec za pretragu:")
-        word = input("")
+        print("unesite reci za pretragu:")
+        search_string = input("")
 
-
-        res = trie.find_word(word)
-
+        res = search_documents(search_string)
 
         if len(res) > 0:
             page_size = int(input("Koliko stranica treba prikazati po pretrazi: "))
-            num_res=len(res)
-            page_num=(num_res // page_size)+1
+            num_res = len(res)
+            page_num = (num_res // page_size) + 1
             current_page = 0
             rank_res = rank(graph,res)
             list_rank=list(rank_res.items())
